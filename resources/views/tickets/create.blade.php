@@ -32,14 +32,16 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Status') }}</label>
+                                <label for="customer" class="col-md-4 col-form-label text-md-right">{{ __('Customer') }}</label>
                                 <div class="col-md-6">
-                                    <select id="status" class="form-control @error('status') is-invalid @enderror" name="status" required autocomplete="status" autofocus>
-                                        <option value="open" {{ old('status') == 'open' ? 'selected' : '' }}>Open</option>
-                                        <option value="closed" {{ old('status') == 'closed' ? 'selected' : '' }}>Closed</option>
+                                    <select id="customer" class="form-control @error('customer') is-invalid @enderror" name="customer_id" required autocomplete="customer" autofocus>
+                                        <option value="">Select Customer</option>
+                                        @foreach ($customers ?? [] as $customer)
+                                            <option value="{{ $customer->id }}">{{ $customer->full_name }}</option>
+                                        @endforeach
                                     </select>
-                                    @error('status')
-                                        <span class="invalid-feedback" role="alert">
+                                    @error('customer')
+                                    <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror

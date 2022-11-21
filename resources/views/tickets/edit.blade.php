@@ -35,17 +35,35 @@
                             <div class="form-group row">
                                 <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Status') }}</label>
                                 <div class="col-md-6">
-                                    <select id="status" class="form-control @error('status') is-invalid @enderror" name="status" required autocomplete="status" autofocus>
-                                        <option value="open" {{ $ticket->status == 'open' ? 'selected' : '' }}>Open</option>
-                                        <option value="closed" {{ $ticket->status == 'closed' ? 'selected' : '' }}>Closed</option>
+                                    <select id="status" class="form-control @error('status') is-invalid @enderror" name="status_id" required autocomplete="status" autofocus>
+                                        @foreach ($statuses as $status)
+                                            <option value="{{ $status->id }}" {{ $ticket->status_id == $status->id ? 'selected' : '' }}>{{ $status->name }}</option>
+                                        @endforeach
                                     </select>
                                     @error('status')
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="customer" class="col-md-4 col-form-label text-md-right">{{ __('Customer') }}</label>
+                                <div class="col-md-6">
+                                    <select id="customer" class="form-control @error('customer') is-invalid @enderror" name="customer_id" required autocomplete="customer" autofocus>
+                                        @foreach ($customers as $customer)
+                                            <option value="{{ $customer->id }}" {{ $ticket->customer_id == $customer->id ? 'selected' : '' }}>{{ $customer->full_name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('customer')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
                             </div>
+
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">

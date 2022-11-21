@@ -6,6 +6,8 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Ticket;
+use App\Models\Customer;
+use App\Models\Status;
 
 class TicketController extends Controller
 {
@@ -26,7 +28,7 @@ class TicketController extends Controller
      */
     public function create(): View
     {
-        return view('tickets.create');
+        return view('tickets.create')->with(['customers' => Customer::all()]);
     }
 
     /**
@@ -40,11 +42,15 @@ class TicketController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
-            'status' => 'required',
             'customer_id' => 'required',
         ]);
 
-        Ticket::create($request->all());
+        Ticket::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'customer_id' => $request->customer_id,
+            'status_id' => 1,
+        ]);
 
         return redirect()->route('tickets.index');
     }
@@ -68,7 +74,7 @@ class TicketController extends Controller
      */
     public function edit(int $id): View
     {
-        return view('tickets.edit')->with('ticket', Ticket::find($id));
+        return view('tickets.edit')->with(['ticket' => Ticket::find($id), 'customers' => Customer::all(), 'statuses' => Status::all()]);
     }
 
     /**
@@ -83,7 +89,7 @@ class TicketController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
-            'status' => 'required',
+            'status_id' => 'required',
             'customer_id' => 'required',
         ]);
 
@@ -91,7 +97,7 @@ class TicketController extends Controller
 
         $ticket->title = $request->input('title');
         $ticket->description = $request->input('description');
-        $ticket->status = $request->input('status');
+        $ticket->status_id = $request->input('status_id');
         $ticket->customer_id = $request->input('customer_id');
 
         $ticket->save();

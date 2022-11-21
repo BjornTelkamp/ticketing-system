@@ -21,7 +21,7 @@
                                 <tr>
                                     <th scope="row">{{ $ticket->id }}</th>
                                     <td>{{ $ticket->title }}</td>
-                                    <td>{{ $ticket->status }}</td>
+                                    <td>{{ ucfirst($ticket->status()->first()->name) }}</td>
                                     <td>{{ $ticket->created_at }}</td>
                                     <td>{{ $ticket->updated_at }}</td>
                                 </tr>

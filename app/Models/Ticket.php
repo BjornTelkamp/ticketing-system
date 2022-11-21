@@ -25,4 +25,9 @@ class Ticket extends Model
     {
         return $this->belongsTo(Status::class, 'status_id');
     }
+
+    public function employees()
+    {
+        return $this->belongsToMany(Employee::class, 'employee_ticket', 'ticket_id', 'employee_id');
+    }
 }

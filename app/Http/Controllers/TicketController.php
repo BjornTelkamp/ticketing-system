@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Ticket;
 use App\Models\Customer;
 use App\Models\Status;
+use App\Models\Employee;
 
 class TicketController extends Controller
 {
@@ -74,7 +75,12 @@ class TicketController extends Controller
      */
     public function edit(int $id): View
     {
-        return view('tickets.edit')->with(['ticket' => Ticket::find($id), 'customers' => Customer::all(), 'statuses' => Status::all()]);
+        return view('tickets.edit')->with([
+            'ticket' => Ticket::find($id),
+            'customers' => Customer::all(),
+            'statuses' => Status::all(),
+            'employees' => Employee::all(),
+        ]);
     }
 
     /**
@@ -85,12 +91,12 @@ class TicketController extends Controller
      * @return RedirectResponse
      */
     public function update(Request $request, int $id): RedirectResponse
-    {
-        $this->validate($request, [
+    {        $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
             'status_id' => 'required',
             'customer_id' => 'required',
+            'employee_id' => 'required',
         ]);
 
         $ticket = Ticket::find($id);
@@ -102,7 +108,9 @@ class TicketController extends Controller
 
         $ticket->save();
 
-        return redirect()->route('tickets.index');
+        $ticket->employees()->sync($request->input('employee_id'));
+
+        return redirect()->route('tickets.show', $id);
     }
 
     /**

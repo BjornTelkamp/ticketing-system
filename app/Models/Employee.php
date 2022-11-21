@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     use HasFactory;
+
+
+    public function getUser()
+    {
+        return User::find($this->user_id);
+    }
+
 }

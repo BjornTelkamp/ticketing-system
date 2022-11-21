@@ -5,7 +5,14 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Ticket') }}</div>
+                    <div class="card-header d-flex">
+                        <div class="flex-grow-1 justify-content-start">
+                            <h3>{{ __('Ticket Details ') }}</h3>
+                        </div>
+                        <div class="justify-content-end">
+                            <a href="{{ route('tickets.edit', ['id' => $ticket->id, 'referrer' => 'show']) }}" class="btn btn-primary float-right">Edit</a>
+                        </div>
+                    </div>
                     <div class="card-body">
                         <table class="table table-striped">
                             <thead>

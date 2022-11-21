@@ -2,7 +2,12 @@
 
 @section('content')
 
-    <div class="container">
+    <main class="p-5">
+        <h1>Ticket dashboard</h1>
+    </main>
+
+
+    <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">

@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header d-flex">
                     <div class="flex-grow-1 justify-content-start">
-                        <h3>{{ __('Tickets') }}</h3>
+                        <h4 class="mb-0 lh-0">{{ __('Tickets') }}</h4>
                     </div>
                     <div class="justify-content-end">
                         <a href="{{ route('tickets.create') }}" class="btn btn-primary float-right">Create</a>
@@ -32,7 +32,7 @@
                                 <td><a href="{{ route('tickets.show', $ticket->id) }}" class="link-primary text-black fw-bold">{{ $ticket->title }}</a></td>
                                 <td>
                                     @php($status = $ticket->status()->first())
-                                    <span class="badge @if($status->name == 'new')text-bg-success @elseif($status->name == 'in progress')text-bg-info @else text-bg-danger @endif p-2"> {{-- todo: make styling for ticket status --}}
+                                    <span class="badge {{ $status->color }} p-2">
                                         {{ ucfirst($status->name) }}
                                     </span>
                                 </td>

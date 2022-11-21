@@ -17,7 +17,7 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="fontxdd">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -30,6 +30,23 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Tickets</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ route('tickets.index') }}">{{ __('Tickets') }}</a></li>
+                                <li><a class="dropdown-item" href="{{ route('tickets.create') }}">{{ __('New Ticket') }}</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('tickets.index') }}">{{ __('Tickets') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('tickets.index') }}">{{ __('Employees') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('tickets.index') }}">{{ __('Customers') }}</a>
+                        </li>
 
                     </ul>
 

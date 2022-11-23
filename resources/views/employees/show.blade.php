@@ -10,7 +10,7 @@
                             <h3>{{ __('Ticket Details ') }}</h3>
                         </div>
                         <div class="justify-content-end">
-                            <a href="{{ route('tickets.edit', $ticket->id) }}?referrer=show" class="btn btn-primary float-right">Edit</a>
+                            <a href="{{ route('tickets.edit', ['id' => $ticket->id, 'referrer' => 'show']) }}" class="btn btn-primary float-right">Edit</a>
                         </div>
                     </div>
                     <div class="card-body">

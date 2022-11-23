@@ -20,17 +20,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('tickets/{ticket}', [App\Http\Controllers\TicketController::class, 'show'])->name('tickets.show');
 
-Route::get('/tickets', [App\Http\Controllers\TicketController::class, 'index'])->name('tickets.index');
+Route::resource('tickets', App\Http\Controllers\TicketController::class);
 
-Route::get('/tickets/create', [App\Http\Controllers\TicketController::class, 'create'])->name('tickets.create');
 
-Route::post('/tickets', [App\Http\Controllers\TicketController::class, 'store'])->name('tickets.store');
 
-Route::get('/tickets/{id}', [App\Http\Controllers\TicketController::class, 'show'])->name('tickets.show');
-
-Route::get('/tickets/{id}/edit', [App\Http\Controllers\TicketController::class, 'edit'])->name('tickets.edit');
-
-Route::put('/tickets/{id}', [App\Http\Controllers\TicketController::class, 'update'])->name('tickets.update');
-
-Route::delete('/tickets/{id}', [App\Http\Controllers\TicketController::class, 'destroy'])->name('tickets.destroy');
+Route::resource('employees', App\Http\Controllers\EmployeeController::class);

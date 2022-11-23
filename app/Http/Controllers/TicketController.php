@@ -29,7 +29,7 @@ class TicketController extends Controller
      */
     public function create(): View
     {
-        return view('tickets.create')->with(['customers' => Customer::all()]);
+        return view('tickets.create')->with(['customers' => Customer::all(), 'employees' => Employee::all()]);
     }
 
     /**
@@ -121,8 +121,7 @@ class TicketController extends Controller
      */
     public function destroy(int $id): RedirectResponse
     {
-        $ticket = Ticket::find($id);
-        $ticket->delete();
+        Ticket::destroy($id);
 
         return redirect()->route('tickets.index');
     }

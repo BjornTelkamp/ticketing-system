@@ -31,23 +31,29 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Tickets</a>
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Tickets</a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="{{ route('tickets.index') }}">{{ __('Tickets') }}</a></li>
                                 <li><a class="dropdown-item" href="{{ route('tickets.create') }}">{{ __('New Ticket') }}</a></li>
                             </ul>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('tickets.index') }}">{{ __('Tickets') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('tickets.index') }}">{{ __('Employees') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('tickets.index') }}">{{ __('Customers') }}</a>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ __('Employees') }}</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ route('employees.index') }}">{{ __('Employees') }}</a></li>
+                                <li><a class="dropdown-item" href="{{ route('employees.create') }}">{{ __('New Employee') }}</a></li>
+                            </ul>
                         </li>
 
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ __('Customers') }}</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{-- route('customers.index') --}}">{{ __('Customers') }}</a></li>
+                                <li><a class="dropdown-item" href="{{-- route('customers.create') --}}">{{ __('New Customer') }}</a></li>
+                            </ul>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

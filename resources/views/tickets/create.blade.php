@@ -20,6 +20,7 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="my-2"></div>
                             <div class="form-group row">
                                 <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
                                 <div class="col-md-6">
@@ -31,6 +32,7 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="my-2"></div>
                             <div class="form-group row">
                                 <label for="customer" class="col-md-4 col-form-label text-md-right">{{ __('Customer') }}</label>
                                 <div class="col-md-6">
@@ -47,12 +49,33 @@
                                     @enderror
                                 </div>
                             </div>
-
-
+                            <div class="my-2"></div>
+                            <div class="form-group row">
+                                <label for="employee" class="col-md-4 col-form-label">{{ __('Employees') }}</label>
+                                <div class="col-md-6">
+                                    <select id="employee" class="form-control @error('employee') is-invalid @enderror" name="employee_id[]" required autocomplete="employee" autofocus multiple>
+                                        @foreach ($employees ?? [] as $employee)
+                                            <option value="{{ $employee->id }}">{{ $employee->getUser()->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('employee')
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="my-2"></div>
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-primary float-end">
                                         {{ __('Create') }}
+                                    </button>
+
+                                    <a href="{{ url()->previous() }}" class="btn btn-secondary float-end me-2">{{ __('Cancel') }}</a>
+
+                                    <button type="reset" class="btn btn-danger me-2" title="This button will reset the form inputs">
+                                        {{ __('Reset') }}
                                     </button>
                                 </div>
                             </div>

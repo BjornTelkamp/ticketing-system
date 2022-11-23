@@ -9,6 +9,16 @@ class Employee extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'first_name',
+        'last_name',
+        'phone_number',
+        'address',
+        'city',
+        'zip_code',
+        'country',
+    ];
 
     public function getUser()
     {

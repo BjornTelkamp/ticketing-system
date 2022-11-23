@@ -40,10 +40,19 @@ class EmployeeController extends Controller
     {
         $this->validate($request, [
             'user_id' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
         ]);
 
         Employee::create([
             'user_id' => $request->user_id,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'phone_number' => $request->phone_number,
+            'address' => $request->address,
+            'city' => $request->city,
+            'zip_code' => $request->zip_code,
+            'country' => $request->country,
         ]);
 
         return redirect()->route('employees.index');

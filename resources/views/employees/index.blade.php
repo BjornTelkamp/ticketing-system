@@ -22,11 +22,11 @@
                                 <th scope="col">First name</th>
                                 <th scope="col">Last name</th>
                                 <th scope="col">Phone number</th>
+                                <th scope="col">User email</th>
                                 <th scope="col">Address</th>
                                 <th scope="col">City</th>
                                 <th scope="col">ZIP code</th>
                                 <th scope="col">Country</th>
-                                <th scope="col">User email</th>
                                 <th scope="col">Created</th>
                                 <th scope="col">Updated</th>
                                 <th></th>
@@ -36,8 +36,12 @@
                             @foreach ($employees ?? [] as $employee)
                             <tr>
                                 <th scope="row">{{ $employee->id }}</th>
-                                <td>{{ $employee->user_id }}</td>
-                                <td>{{ $employee->first_name }}</td>
+                                <td>{{ $employee->user_id }} <br> <small>({{ $employee->user->name }})</small></td>
+                                <td>
+                                    <a href="{{ route('employees.show', $employee->id) }}">
+                                        {{ $employee->first_name }}
+                                    </a>
+                                </td>
                                 <td>{{ $employee->last_name }}</td>
                                 <td>{{ $employee->phone_number }}</td>
                                 <td>{{ $employee->getUser()->email }}</td>

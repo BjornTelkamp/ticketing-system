@@ -7,10 +7,10 @@
                 <div class="card">
                     <div class="card-header d-flex">
                         <div class="flex-grow-1 justify-content-start">
-                            <h3>{{ __('Ticket Details ') }}</h3>
+                            <h3>{{ __('Employee Details ') }}</h3>
                         </div>
                         <div class="justify-content-end">
-                            <a href="{{ route('tickets.edit', ['id' => $ticket->id, 'referrer' => 'show']) }}" class="btn btn-primary float-right">Edit</a>
+                            <a href="{{ route('employees.edit', $employee->id) }}?referred=show" class="btn btn-primary float-right">Edit</a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -18,19 +18,17 @@
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col">Full name</th>
                                     <th scope="col">Created</th>
                                     <th scope="col">Updated</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th scope="row">{{ $ticket->id }}</th>
-                                    <td>{{ $ticket->title }}</td>
-                                    <td>{{ ucfirst($ticket->status()->first()->name) }}</td>
-                                    <td>{{ $ticket->created_at }}</td>
-                                    <td>{{ $ticket->updated_at }}</td>
+                                    <th scope="row">{{ $employee->id }}</th>
+                                    <td>{{ $employee->getFullName() }}</td>
+                                    <td>{{ $employee->created_at }}</td>
+                                    <td>{{ $employee->updated_at }}</td>
                                 </tr>
                             </tbody>
                         </table>

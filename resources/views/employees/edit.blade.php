@@ -5,81 +5,131 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Edit Ticket') }}</div>
+                    <div class="card-header">{{ __('Edit Employee') }}</div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('tickets.update', $ticket->id) }}">
+                        <form method="POST" action="{{ route('employees.update', $employee->id) }}">
                             @csrf
                             @method('PUT')
                             <div class="form-group row">
-                                <label for="title" class="col-md-4 col-form-label">{{ __('Title') }}</label>
+                                <label for="first_name"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
                                 <div class="col-md-6">
-                                    <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ $ticket->title }}" required autocomplete="title" autofocus>
-                                    @error('title')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="my-2"></div>
-                            <div class="form-group row">
-                                <label for="description" class="col-md-4 col-form-label">{{ __('Description') }}</label>
-                                <div class="col-md-6">
-                                    <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" required autocomplete="description" autofocus>{{ $ticket->description }}</textarea>
-                                    @error('description')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="my-2"></div>
-                            <div class="form-group row">
-                                <label for="status" class="col-md-4 col-form-label">{{ __('Status') }}</label>
-                                <div class="col-md-6">
-                                    <select id="status" class="form-control @error('status') is-invalid @enderror" name="status_id" required autocomplete="status" autofocus>
-                                        @foreach ($statuses as $status)
-                                            <option value="{{ $status->id }}" {{ $ticket->status_id == $status->id ? 'selected' : '' }}>{{ $status->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('status')
+                                    <input id="first_name" type="text"
+                                           class="form-control @error('first_name') is-invalid @enderror"
+                                           name="first_name" value="{{ $employee->first_name }}"
+                                           placeholder="Enter your first time" autofocus required>
+                                    @error('first_name')
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                           <strong>{{ $message }}</strong>
+                                       </span>
                                     @enderror
                                 </div>
                             </div>
                             <div class="my-2"></div>
                             <div class="form-group row">
-                                <label for="customer" class="col-md-4 col-form-label">{{ __('Customer') }}</label>
+                                <label for="last_name"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}</label>
                                 <div class="col-md-6">
-                                    <select id="customer" class="form-control @error('customer') is-invalid @enderror" name="customer_id" required autocomplete="customer" autofocus>
-                                        <option value="">Select Customer</option>
-                                        @foreach ($customers as $customer)
-                                            <option value="{{ $customer->id }}" {{ $ticket->customer_id == $customer->id ? 'selected' : '' }}>{{ $customer->full_name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('customer')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    <input id="last_name" type="text"
+                                           class="form-control @error('last_name') is-invalid @enderror"
+                                           name="last_name" value="{{ $employee->last_name }}"
+                                           placeholder="Enter your last name" required>
+                                    @error('last_name')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                     @enderror
                                 </div>
                             </div>
                             <div class="my-2"></div>
                             <div class="form-group row">
-                                <label for="employee" class="col-md-4 col-form-label">{{ __('Employees') }}</label>
+                                <label for="phone_number"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Number') }}</label>
                                 <div class="col-md-6">
-                                    <select id="employee" class="form-control @error('employee') is-invalid @enderror" name="employee_id[]" required autocomplete="employee" autofocus multiple>
-                                        <option value="">Select Employee</option>
-                                        @foreach ($employees as $employee)
-                                            <option value="{{ $employee->id }}" @foreach($ticket->employees()->get() as $e) {{ $e->user_id == $employee->id ? 'selected' : '' }} @endforeach >{{ $employee->getUser()->name }}</option>
+                                    <input id="phone_number" type="text"
+                                           class="form-control @error('phone_number') is-invalid @enderror"
+                                           name="phone_number" value="{{ $employee->phone_number }}"
+                                           placeholder="Enter your phone number">
+                                    @error('phone_number')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="my-2"></div>
+                            <div class="form-group row">
+                                <label for="address"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
+                                <div class="col-md-6">
+                                    <input id="address" type="text"
+                                           class="form-control @error('address') is-invalid @enderror" name="address"
+                                           value="{{ $employee->address }}" placeholder="Enter your address">
+                                    @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="my-2"></div>
+                            <div class="form-group row">
+                                <label for="city" class="col-md-4 col-form-label text-md-right">{{ __('City') }}</label>
+                                <div class="col-md-6">
+                                    <input id="city" type="text"
+                                           class="form-control @error('city') is-invalid @enderror" name="city"
+                                           value="{{ $employee->city }}" placeholder="Enter your city">
+                                    @error('city')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="my-2"></div>
+                            <div class="form-group row">
+                                <label for="zip_code"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('ZIP code') }}</label>
+                                <div class="col-md-6">
+                                    <input id="zip_code" type="text"
+                                           class="form-control @error('zip_code') is-invalid @enderror" name="zip_code"
+                                           value="{{ $employee->zip_code }}" placeholder="Enter your ZIP code">
+                                    @error('zip_code')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="my-2"></div>
+                            <div class="form-group row">
+                                <label for="country"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Country') }}</label>
+                                <div class="col-md-6">
+                                    <input id="country" type="text"
+                                           class="form-control @error('country') is-invalid @enderror" name="country"
+                                           value="{{ $employee->country }}" placeholder="Enter your country">
+                                    @error('country')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="my-2"></div>
+                            <div class="form-group row">
+                                <label for="user" class="col-md-4 col-form-label">{{ __('Connected user account') }}</label>
+                                <div class="col-md-6">
+                                    <select id="user" class="form-control @error('user') is-invalid @enderror" name="user_id" required>
+                                        <option value="">Select user</option>
+                                        @foreach ($users ?? [] as $user)
+                                            <option value="{{ $user->id }}" @if($user->id == $employee->user_id) selected @endif>{{ $user->name }}</option>
                                         @endforeach
                                     </select>
-                                    @error('employee')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    @error('user')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>
@@ -87,9 +137,11 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary float-end">
-                                        {{ __('Update') }}
+                                        {{ __('Save') }}
                                     </button>
-                                    <a href="{{ url()->previous() }}" class="btn btn-secondary float-end me-2">Cancel</a>
+
+                                    <a href="{{ url()->previous() }}"
+                                       class="btn btn-secondary float-end me-2">{{ __('Cancel') }}</a>
                                 </div>
                             </div>
                         </form>

@@ -25,4 +25,23 @@ class Employee extends Model
         return User::find($this->user_id);
     }
 
+    public function tickets()
+    {
+        return $this->belongsToMany(Ticket::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the full name of the employee.
+     * @return string
+     */
+    public function getFullName(): string
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
 }

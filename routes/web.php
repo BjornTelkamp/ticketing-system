@@ -13,17 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-//Route::get('tickets/{ticket}', [App\Http\Controllers\TicketController::class, 'show'])->name('tickets.show');
 
-Route::resource('tickets', App\Http\Controllers\TicketController::class);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', function () {
+        return view('dashboard');
+    });
 
-
-
-Route::resource('employees', App\Http\Controllers\EmployeeController::class);
+    Route::resource('customers', App\Http\Controllers\CustomerController::class);
+    Route::resource('tickets', App\Http\Controllers\TicketController::class);
+    Route::resource('employees', App\Http\Controllers\EmployeeController::class);
+});

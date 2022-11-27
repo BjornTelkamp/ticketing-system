@@ -21,7 +21,6 @@
                                 <th scope="col">Title</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Created</th>
-                                <th scope="col">Updated</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -37,7 +36,6 @@
                                     </span>
                                 </td>
                                 <td title="{{ date('m-d-Y H:i', strtotime($ticket->created_at)) }}">{{ date('d-m-Y', strtotime($ticket->created_at)) }}</td>
-                                <td title="{{ date('m-d-Y H:i', strtotime($ticket->updated_at)) }}">{{ date('d-m-Y', strtotime($ticket->updated_at)) }}</td>
                                 <td width="20%">
                                     <div class=" d-flex justify-content-end">
                                         <a href="{{ route('tickets.edit', $ticket->id) }}" class="btn btn-secondary rounded-0 rounded-start">Edit</a>

@@ -28,7 +28,6 @@
                                 <th scope="col">ZIP code</th>
                                 <th scope="col">Country</th>
                                 <th scope="col">Created</th>
-                                <th scope="col">Updated</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -44,13 +43,12 @@
                                 </td>
                                 <td>{{ $employee->last_name }}</td>
                                 <td>{{ $employee->phone_number }}</td>
-                                <td>{{ $employee->getUser()->email }}</td>
+                                <td>{{ $employee->user->email }}</td>
                                 <td>{{ $employee->address }}</td>
                                 <td>{{ $employee->city }}</td>
                                 <td>{{ $employee->zip_code }}</td>
                                 <td>{{ $employee->country }}</td>
                                 <td title="{{ date('m-d-Y H:i', strtotime($employee->created_at)) }}">{{ date('d-m-Y', strtotime($employee->created_at)) }}</td>
-                                <td title="{{ date('m-d-Y H:i', strtotime($employee->updated_at)) }}">{{ date('d-m-Y', strtotime($employee->updated_at)) }}</td>
                                 <td width="">
                                     <div class=" d-flex justify-content-end">
                                         <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-secondary rounded-0 rounded-start">Edit</a>

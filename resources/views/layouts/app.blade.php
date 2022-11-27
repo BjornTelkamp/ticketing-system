@@ -51,8 +51,8 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ __('Customers') }}</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{-- route('customers.index') --}}">{{ __('Customers') }}</a></li>
-                                <li><a class="dropdown-item" href="{{-- route('customers.create') --}}">{{ __('New Customer') }}</a></li>
+                                <li><a class="dropdown-item" href="{{ route('customers.index') }}">{{ __('Customers') }}</a></li>
+                                <li><a class="dropdown-item" href="{{ route('customers.create') }}">{{ __('New Customer') }}</a></li>
                             </ul>
                         </li>
                     </ul>

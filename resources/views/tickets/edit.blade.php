@@ -71,9 +71,8 @@
                                 <label for="employee" class="col-md-4 col-form-label">{{ __('Employees') }}</label>
                                 <div class="col-md-6">
                                     <select id="employee" class="form-control @error('employee') is-invalid @enderror" name="employee_id[]" required autocomplete="employee" autofocus multiple>
-                                        <option value="">Select Employee</option>
                                         @foreach ($employees as $employee)
-                                            <option value="{{ $employee->id }}" @foreach($ticket->employees()->get() as $e) {{ $e->user_id == $employee->id ? 'selected' : '' }} @endforeach >{{ $employee->getUser()->name }}</option>
+                                            <option value="{{ $employee->id }}" @foreach($ticket->employees()->get() as $e) @if($e->id == $employee->id) {{ 'selected' }} @endif @endforeach >{{ $employee->getUser()->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('employee')

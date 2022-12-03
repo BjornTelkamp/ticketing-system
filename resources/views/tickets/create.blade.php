@@ -36,13 +36,13 @@
                             <div class="form-group row">
                                 <label for="customer" class="col-md-4 col-form-label text-md-right">{{ __('Customer') }}</label>
                                 <div class="col-md-6">
-                                    <select id="customer" class="form-control @error('customer') is-invalid @enderror" name="customer_id" required autocomplete="customer" autofocus>
+                                    <select id="customer" class="form-control @error('customer_id') is-invalid @enderror" name="customer_id" required autocomplete="customer" autofocus>
                                         <option value="">Select Customer</option>
                                         @foreach ($customers ?? [] as $customer)
                                             <option value="{{ $customer->id }}">{{ $customer->full_name }}</option>
                                         @endforeach
                                     </select>
-                                    @error('customer')
+                                    @error('customer_id')
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -53,12 +53,12 @@
                             <div class="form-group row">
                                 <label for="employee" class="col-md-4 col-form-label">{{ __('Employees') }}</label>
                                 <div class="col-md-6">
-                                    <select id="employee" class="form-control @error('employee') is-invalid @enderror" name="employee_id[]" required autocomplete="employee" autofocus multiple>
+                                    <select id="employee" class="form-control @error('employee_id') is-invalid @enderror" name="employee_id[]" required autocomplete="employee" autofocus multiple>
                                         @foreach ($employees ?? [] as $employee)
                                             <option value="{{ $employee->id }}">{{ $employee->getUser()->name }}</option>
                                         @endforeach
                                     </select>
-                                    @error('employee')
+                                    @error('employee_id')
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -86,3 +86,6 @@
         </div>
     </div>
 @endsection
+
+
+

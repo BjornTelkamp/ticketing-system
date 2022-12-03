@@ -11,6 +11,18 @@ use App\Models\User;
 class EmployeeController extends Controller
 {
     /**
+     * An array of the validation rules.
+     * @return string[]
+     */
+    public function rules(): array {
+        return [
+            'user_id' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+        ];
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return View
@@ -38,11 +50,7 @@ class EmployeeController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $this->validate($request, [
-            'user_id' => 'required',
-            'first_name' => 'required',
-            'last_name' => 'required',
-        ]);
+        $this->validate($request, $this->rules());
 
         Employee::create([
             'user_id' => $request->user_id,
@@ -89,24 +97,9 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, int $id): RedirectResponse
     {
-        $this->validate($request, [
-            'user_id' => 'required',
-            'first_name' => 'required',
-            'last_name' => 'required',
-        ]);
-
-        $employee = Employee::find($id);
-
-        $employee->update([
-            'user_id' => $request->user_id,
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'phone_number' => $request->phone_number,
-            'address' => $request->address,
-            'city' => $request->city,
-            'zip_code' => $request->zip_code,
-            'country' => $request->country,
-        ]);
+        $this->validate($request, $this->rules());
+        $employee = Employee::findOrFail($id);
+        $employee?->update($request->all());
 
         return redirect()->route('employees.show', $id);
     }

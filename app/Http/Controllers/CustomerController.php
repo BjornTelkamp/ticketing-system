@@ -9,6 +9,20 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
+
+    /**
+     * An array of the validation rules.
+     * @return string[]
+     */
+    public function rules(): array
+    {
+        return [
+            'full_name' => 'required',
+            'email' => 'required|email',
+            'phone_number' => 'required',
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -37,11 +51,7 @@ class CustomerController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $this->validate($request, [
-            'full_name' => 'required',
-            'email' => 'required',
-            'phone_number' => 'required',
-        ]);
+        $this->validate($request, $this->rules());
 
         Customer::create([
             'full_name' => $request->full_name,
@@ -83,19 +93,9 @@ class CustomerController extends Controller
      */
     public function update(Request $request, int $id): RedirectResponse
     {
-        $this->validate($request, [
-            'full_name' => 'required',
-            'email' => 'required',
-            'phone_number' => 'required',
-        ]);
-
-        $customer = Customer::find($id);
-
-        $customer->update([
-            'full_name' => $request->full_name,
-            'email' => $request->email,
-            'phone_number' => $request->phone_number,
-        ]);
+        $this->validate($request, $this->rules());
+        $customer = Customer::findOrFail($id);
+        $customer?->update($request->all());
 
         return redirect()->route('customers.index');
     }

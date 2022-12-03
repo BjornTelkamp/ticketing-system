@@ -13,6 +13,19 @@ use App\Models\Employee;
 class TicketController extends Controller
 {
     /**
+     * An array of the validation rules.
+     * @return string[]
+     */
+    public function rules(): array {
+        return [
+            'title' => 'required',
+            'description' => 'required',
+            'customer_id' => 'required',
+            'employee_id' => 'required',
+        ];
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return View
@@ -40,11 +53,7 @@ class TicketController extends Controller
      */
     public function store(Request $request) : redirectResponse
     {
-        $this->validate($request, [
-            'title' => 'required',
-            'description' => 'required',
-            'customer_id' => 'required',
-        ]);
+        $this->validate($request, $this->rules());
 
         Ticket::create([
             'title' => $request->title,
@@ -91,22 +100,12 @@ class TicketController extends Controller
      * @return RedirectResponse
      */
     public function update(Request $request, int $id): RedirectResponse
-    {        $this->validate($request, [
-            'title' => 'required',
-            'description' => 'required',
-            'status_id' => 'required',
-            'customer_id' => 'required',
-            'employee_id' => 'required',
-        ]);
+    {
+        $this->validate($request, $this->rules());
 
-        $ticket = Ticket::find($id);
+        $ticket = Ticket::findOrFail($id);
 
-        $ticket->title = $request->input('title');
-        $ticket->description = $request->input('description');
-        $ticket->status_id = $request->input('status_id');
-        $ticket->customer_id = $request->input('customer_id');
-
-        $ticket->save();
+        $ticket?->update($request->all());
 
         $ticket->employees()->sync($request->input('employee_id'));
 

@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Models\Ticket;
-use App\Models\Customer;
-use App\Models\Status;
+use Illuminate\View\View;
 use App\Models\Employee;
+use App\Models\User;
 
-class TicketController extends Controller
+class EmployeeController extends Controller
 {
     /**
      * An array of the validation rules.
@@ -18,10 +16,9 @@ class TicketController extends Controller
      */
     public function rules(): array {
         return [
-            'title' => 'required',
-            'description' => 'required',
-            'customer_id' => 'required',
-            'employee_id' => 'required',
+            'user_id' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
         ];
     }
 
@@ -32,7 +29,7 @@ class TicketController extends Controller
      */
     public function index(): View
     {
-        return view('tickets.index')->with('tickets', Ticket::all());
+        return view('employees.index')->with('employees', Employee::all());
     }
 
     /**
@@ -42,7 +39,7 @@ class TicketController extends Controller
      */
     public function create(): View
     {
-        return view('tickets.create')->with(['customers' => Customer::all(), 'employees' => Employee::all()]);
+        return view('employees.create')->with(['users' => User::all()]);
     }
 
     /**
@@ -51,18 +48,22 @@ class TicketController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function store(Request $request) : redirectResponse
+    public function store(Request $request): RedirectResponse
     {
         $this->validate($request, $this->rules());
 
-        Ticket::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'customer_id' => $request->customer_id,
-            'status_id' => 1,
+        Employee::create([
+            'user_id' => $request->user_id,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'phone_number' => $request->phone_number,
+            'address' => $request->address,
+            'city' => $request->city,
+            'zip_code' => $request->zip_code,
+            'country' => $request->country,
         ]);
 
-        return redirect()->route('tickets.index');
+        return redirect()->route('employees.index');
     }
 
     /**
@@ -73,7 +74,7 @@ class TicketController extends Controller
      */
     public function show(int $id): View
     {
-        return view('tickets.show')->with('ticket', Ticket::find($id));
+        return view('employees.show')->with('employee', Employee::find($id));
     }
 
     /**
@@ -84,12 +85,7 @@ class TicketController extends Controller
      */
     public function edit(int $id): View
     {
-        return view('tickets.edit')->with([
-            'ticket' => Ticket::find($id),
-            'customers' => Customer::all(),
-            'statuses' => Status::all(),
-            'employees' => Employee::all(),
-        ]);
+        return view('employees.edit')->with(['employee' => Employee::find($id), 'users' => User::all()]);
     }
 
     /**
@@ -102,14 +98,10 @@ class TicketController extends Controller
     public function update(Request $request, int $id): RedirectResponse
     {
         $this->validate($request, $this->rules());
+        $employee = Employee::findOrFail($id);
+        $employee?->update($request->all());
 
-        $ticket = Ticket::findOrFail($id);
-
-        $ticket?->update($request->all());
-
-        $ticket->employees()->sync($request->input('employee_id'));
-
-        return redirect()->route('tickets.show', $id);
+        return redirect()->route('employees.show', $id);
     }
 
     /**
@@ -120,8 +112,8 @@ class TicketController extends Controller
      */
     public function destroy(int $id): RedirectResponse
     {
-        Ticket::destroy($id);
+        Employee::destroy($id);
 
-        return redirect()->route('tickets.index');
+        return redirect()->route('employees.index');
     }
 }

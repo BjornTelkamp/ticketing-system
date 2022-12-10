@@ -21,8 +21,18 @@ class Ticket extends Model
      * Get the status that's associated with the ticket.
      * @return BelongsTo
      */
-    public function status()
+    public function status(): BelongsTo
     {
         return $this->belongsTo(Status::class, 'status_id');
+    }
+
+    public function employees()
+    {
+        return $this->belongsToMany(Employee::class, 'employee_ticket', 'ticket_id', 'employee_id');
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id');
     }
 }

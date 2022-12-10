@@ -21,7 +21,7 @@ class Ticket extends Model
      * Get the status that's associated with the ticket.
      * @return BelongsTo
      */
-    public function status()
+    public function status(): BelongsTo
     {
         return $this->belongsTo(Status::class, 'status_id');
     }

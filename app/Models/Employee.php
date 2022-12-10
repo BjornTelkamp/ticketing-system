@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Employee extends Model
 {
@@ -25,12 +27,20 @@ class Employee extends Model
         return User::find($this->user_id);
     }
 
-    public function tickets()
+    /**
+     * Get the tickets that are associated with the employee.
+     * @return BelongsToMany
+     */
+    public function tickets() : BelongsToMany
     {
         return $this->belongsToMany(Ticket::class);
     }
 
-    public function user()
+    /**
+     * Get the user that's associated with the employee.
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

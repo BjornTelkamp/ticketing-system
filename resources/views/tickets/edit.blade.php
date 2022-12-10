@@ -13,7 +13,7 @@
                             <div class="form-group row">
                                 <label for="title" class="col-md-4 col-form-label">{{ __('Title') }}</label>
                                 <div class="col-md-6">
-                                    <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ $ticket->title }}" required autocomplete="title" autofocus>
+                                    <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ $ticket->title }}" required autofocus>
                                     @error('title')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -25,7 +25,7 @@
                             <div class="form-group row">
                                 <label for="description" class="col-md-4 col-form-label">{{ __('Description') }}</label>
                                 <div class="col-md-6">
-                                    <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" required autocomplete="description" autofocus>{{ $ticket->description }}</textarea>
+                                    <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" required >{{ $ticket->description }}</textarea>
                                     @error('description')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -37,7 +37,7 @@
                             <div class="form-group row">
                                 <label for="status" class="col-md-4 col-form-label">{{ __('Status') }}</label>
                                 <div class="col-md-6">
-                                    <select id="status" class="form-control @error('status') is-invalid @enderror" name="status_id" required autocomplete="status" autofocus>
+                                    <select id="status" class="form-control @error('status') is-invalid @enderror" name="status_id" required >
                                         @foreach ($statuses as $status)
                                             <option value="{{ $status->id }}" {{ $ticket->status_id == $status->id ? 'selected' : '' }}>{{ $status->name }}</option>
                                         @endforeach
@@ -53,7 +53,7 @@
                             <div class="form-group row">
                                 <label for="customer" class="col-md-4 col-form-label">{{ __('Customer') }}</label>
                                 <div class="col-md-6">
-                                    <select id="customer" class="form-control @error('customer') is-invalid @enderror" name="customer_id" required autocomplete="customer" autofocus>
+                                    <select id="customer" class="form-control @error('customer') is-invalid @enderror" name="customer_id" required >
                                         <option value="">Select Customer</option>
                                         @foreach ($customers as $customer)
                                             <option value="{{ $customer->id }}" {{ $ticket->customer_id == $customer->id ? 'selected' : '' }}>{{ $customer->full_name }}</option>
@@ -70,7 +70,7 @@
                             <div class="form-group row">
                                 <label for="employee" class="col-md-4 col-form-label">{{ __('Employees') }}</label>
                                 <div class="col-md-6">
-                                    <select id="employee" class="form-control @error('employee') is-invalid @enderror" name="employee_id[]" required autocomplete="employee" autofocus multiple>
+                                    <select id="employee" class="form-control @error('employee') is-invalid @enderror" name="employee_id[]" required  multiple>
                                         @foreach ($employees as $employee)
                                             <option value="{{ $employee->id }}" @foreach($ticket->employees()->get() as $e) @if($e->id == $employee->id) {{ 'selected' }} @endif @endforeach >{{ $employee->getUser()->name }}</option>
                                         @endforeach

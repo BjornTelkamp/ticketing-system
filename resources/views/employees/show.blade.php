@@ -18,11 +18,12 @@
                         <thead>
                         <tr>
                             <th scope="row">Customer information</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <th scope="row" width="50%">ID</th>
+                                <th scope="row" style="width: 50%">ID</th>
                                 <td>{{ $employee->id }}</td>
                             </tr>
                             <tr>
@@ -47,11 +48,12 @@
                         <thead>
                         <tr>
                             <th scope="row">Address information</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <th scope="row" width="50%">Address</th>
+                                <th scope="row" style="width: 50%">Address</th>
                                 <td>{{ $employee->address }}</td>
                             </tr>
                             <tr>

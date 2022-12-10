@@ -18,6 +18,7 @@
                         <thead>
                         <tr>
                             <th scope="row">Customer information</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>

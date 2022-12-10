@@ -12,7 +12,7 @@
                             <div class="form-group row">
                                 <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Title') }}</label>
                                 <div class="col-md-6">
-                                    <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required autocomplete="title" autofocus>
+                                    <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required autofocus>
                                     @error('title')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -24,7 +24,7 @@
                             <div class="form-group row">
                                 <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
                                 <div class="col-md-6">
-                                    <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" required autocomplete="description" autofocus>{{ old('description') }}</textarea>
+                                    <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" required>{{ old('description') }}</textarea>
                                     @error('description')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -36,7 +36,7 @@
                             <div class="form-group row">
                                 <label for="customer" class="col-md-4 col-form-label text-md-right">{{ __('Customer') }}</label>
                                 <div class="col-md-6">
-                                    <select id="customer" class="form-control @error('customer_id') is-invalid @enderror" name="customer_id" required autocomplete="customer" autofocus>
+                                    <select id="customer" class="form-control @error('customer_id') is-invalid @enderror" name="customer_id" required>
                                         <option value="">Select Customer</option>
                                         @foreach ($customers ?? [] as $customer)
                                             <option value="{{ $customer->id }}">{{ $customer->full_name }}</option>
@@ -53,7 +53,7 @@
                             <div class="form-group row">
                                 <label for="employee" class="col-md-4 col-form-label">{{ __('Employees') }}</label>
                                 <div class="col-md-6">
-                                    <select id="employee" class="form-control @error('employee_id') is-invalid @enderror" name="employee_id[]" required autocomplete="employee" autofocus multiple>
+                                    <select id="employee" class="form-control @error('employee_id') is-invalid @enderror" name="employee_id[]" required multiple>
                                         @foreach ($employees ?? [] as $employee)
                                             <option value="{{ $employee->id }}">{{ $employee->getUser()->name }}</option>
                                         @endforeach

@@ -17,7 +17,7 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th scope="row">Customer information</th>
+                            <th scope="row">Employee information</th>
                             <th></th>
                         </tr>
                         </thead>

@@ -46,6 +46,48 @@
                         </table>
                     </div>
                 </div>
+                <div class="card mt-5">
+                    <div class="card-header d-flex">
+                        <div class="flex-grow-1 justify-content-start">
+                            <h3>{{ __('Info') }}</h3>
+                        </div>
+                        <div class="justify-content-end">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Customer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <a href="{{ route('customers.show', $ticket->customer->id) }}" >{{ $ticket->customer->getFullName() }}</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Assigned to</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($ticket->employees()->get() as $employee)
+                                <tr>
+                                    <td>
+                                        <a href="{{ route('employees.show', $employee->id) }}" >{{ $employee->getFullName() }}</a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>

@@ -87,7 +87,7 @@ class TicketController extends Controller
         return view('tickets.edit')->with([
             'ticket' => Ticket::find($id),
             'customers' => Customer::all(),
-            'statuses' => Status::all(),
+            'statuses' => Status::where('name', '!=', 'closed')->get(),
             'employees' => Employee::all(),
         ]);
     }
@@ -120,7 +120,11 @@ class TicketController extends Controller
      */
     public function destroy(int $id): RedirectResponse
     {
-        Ticket::destroy($id);
+        $ticket = Ticket::findOrFail($id);
+
+        $ticket->update(['status_id' => 4]);
+
+        $ticket->delete();
 
         return redirect()->route('tickets.index');
     }

@@ -19,10 +19,9 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', function () {
-        return view('dashboard');
-    });
 
+    Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+    
     Route::resource('customers', App\Http\Controllers\CustomerController::class);
     Route::resource('tickets', App\Http\Controllers\TicketController::class);
     Route::resource('employees', App\Http\Controllers\EmployeeController::class);
